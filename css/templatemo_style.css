@@ -189,4 +189,40 @@ td
 	display: none;
 }
 
+.labelTitle
+{
+	color: red;
+	display: block;
+	font-size: 18px;
+}
+
+.labelGeneral
+{
+	font-size: 14px;
+	display: block;
+	margin-bottom: 20px;
+}
+
+#my_popup h1
+{
+	color: red;
+}
+
+.my_popup_btn
+{
+	font-size: 16px; 
+	background: #15171d; 
+	color: #fff; 
+	cursor: pointer; 
+	border: 1px solid #30333c; 
+	padding: 4px 10px;
+}
+
+.my_popup_bottom
+{
+	margin-top: 50px;
+	position: absolute;
+	right: 0px;
+}
+
 #contact_form form select { width: 450px; padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-bottom: 20px;}

@@ -1,31 +1,45 @@
 <?php
-	session_start();
+	$isbn = $_POST["data"];
+	$googleId = "AIzaSyDGgd3jmF7-BuVhGdlhsYLovQHNMBe0K_4";
 	
-	// Load le fichier XML
-	$url = "http://isbndb.com/api/books.xml?access_key=92L5NBSB&results=texts&index1=isbn&value1=9782714449689";
-	$xml = simplexml_load_file($url);
-	
-	$info = $xml->BookList->BookData;
-	
-	// Récupère les informations
-	$titre = $info[0]->Title;
-	$auteur = $info[0]->AuthorsText;
-	$publisher = $info[0]->PublisherText;
-	$sommaire = $info[0]->Summary;
-	$notes = $info[0]->Notes;
+	// Get the book id
+	$url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $isbn;
+    $page = file_get_contents($url);
+    $data = json_decode($page, true);
+    $bookId = $data['items'][0]['id'];
+    
+    // Get the book's details
+	$url = "https://www.googleapis.com/books/v1/volumes/" . $bookId . "?key=" . $googleId;
+    $page = file_get_contents($url);
+    $data = json_decode($page, true);
+
+    $book = $data['volumeInfo'];
+
+    $titre = $book['title'];
+    $auteur = @implode(",", $book['authors']);
+    $publisher = $book['publisher'];
+    $publishedDate = $book['publishedDate'];
+    $pageCount = $book['pageCount'];
+    $sommaire = "";
+    $notes = "";
+
+    if (!empty($book['description']))
+        $sommaire = $book['description'];
 	
 	// Conversion en string pour utiliser les variables de session
-	$titre2 = (string)$titre;
-	$auteur2 = (string)$auteur;
-	$publisher2 = (string)$publisher;
-	$sommaire2 = (string)$sommaire;
-	$notes2 = (string)$notes;
-	
-	$_SESSION['nomLivre'] = $titre2;
-	$_SESSION['nomAuteur'] = $auteur2;
-	$_SESSION['editeur'] = $publisher2;
-	$_SESSION['sommaire'] = $sommaire2;
-	$_SESSION['notes'] = $notes2;
-	
-	header("Location: http://localhost/Biblio/views/ajouterFilmOuLivre.php");
+	$titre = (string)$titre;
+	$auteur = (string)$auteur;
+	$publisher = (string)$publisher;
+	$publishedDate = (string)$publishedDate;
+	$pageCount = (string)$pageCount;
+	$sommaire = (string)$sommaire;
+
+	$return[] = array("nomLivre" => $titre, 
+		"auteurLivre" => $auteur,
+		"editeurLivre" => $publisher,
+		"sommaireLivre" => $sommaire,
+		"noteLivre" => $notes);
+
+    $json = json_encode($return);
+	echo $json;
 ?>

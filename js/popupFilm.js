@@ -40,8 +40,7 @@ function positionPopup(){
 	
 	$("#overlay_form").css({
 		left: ($(window).width() - $('#overlay_form').width()) / 2,
-		top: ($(window).width() - $('#overlay_form').width()) / 7,
-		position:'fixed'
+		top: ($(window).width() - $('#overlay_form').width()) / 12,
 	});
 }
  

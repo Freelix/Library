@@ -1,5 +1,5 @@
 <?php
-	$bdd=mysqli_connect("localhost","root","password","biblio");
+	$bdd=mysqli_connect("localhost","root","","biblio");
 
 	if (mysqli_connect_errno($bdd))
   	{

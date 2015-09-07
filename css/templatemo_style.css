@@ -118,7 +118,7 @@ h6 { font-size: 12px; margin: 0 0 5px; padding: 0; font-weight: 700 }
 #Ajouter p { margin-bottom: 30px }
 
 # { padding: 0; width: 380px;}
-#contact_form form { margin: 0px; padding: 0px; }
+#contact_form form { margin: 0px; padding: 0px; margin-bottom: 50px;}
 #contact_form form .input_field { width: 450px; padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-bottom: 20px;}
 #contact_form form .input_large_field { width: 450px; height: 100px; padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-bottom: 20px; resize: none;}
 #contact_form form label { display: block;font-size: 11px }
@@ -174,7 +174,7 @@ td
 
 .tableau
 {
-	margin-top: 75px;
+	margin-top: 15px;
 }
 
 .message
@@ -188,6 +188,8 @@ td
 {
 	display: none;
 }
+
+/* Popup for add an item */
 
 .labelTitle
 {
@@ -210,7 +212,8 @@ td
 
 .my_popup_btn
 {
-	font-size: 16px; 
+	font-size: 22px;
+	width: 250px;
 	background: #15171d; 
 	color: #fff; 
 	cursor: pointer; 
@@ -222,7 +225,27 @@ td
 {
 	margin-top: 50px;
 	position: absolute;
-	right: 0px;
+	right: 40px;
+}
+
+/* Arrow in main pages */
+
+.arrowLeft
+{
+	margin-left: 40%;
+	margin-right: 5%;
+	cursor: pointer;
+}
+
+.arrowRight
+{
+	cursor: pointer;
+}
+
+#numberOfRows
+{
+	color: white;
+	font-size: 20px;
 }
 
 #contact_form form select { width: 450px; padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-bottom: 20px;}

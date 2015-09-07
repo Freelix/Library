@@ -1,17 +1,39 @@
 <?php
 	include("../connexion.php");
+    
+    $pageNumber = 0;
+    $customQuery = "";
+    $query = "";
 
-	if (isset($_SESSION['rechercheLivre']))
-		$resultat = mysqli_query($bdd, $_SESSION['rechercheLivre']);
+    if (!empty($_POST["data"]))
+	    $pageNumber = $_POST["data"];
+
+	if (!empty($_POST["cq"]))
+		$_SESSION['rechercheLivre'] = $_POST["cq"];
+
+	if (isset($_SESSION['rechercheLivre']) && strlen($_SESSION["rechercheLivre"]) > 4) // customQuery.length = 4
+	{
+		$customQuery = $_SESSION["rechercheLivre"];
+		$_SESSION["rechercheLivre"] = $_SESSION["rechercheLivre"] . " LIMIT " . $pageNumber . ", 5";
+		$query = $_SESSION['rechercheLivre'];
+		$resultat = mysqli_query($bdd, $query);	
+	}
 	else
-		$resultat = mysqli_query($bdd, "SELECT * FROM livre");
+	{
+		$query = "SELECT * FROM livre LIMIT " . $pageNumber . ", 5";
+		$resultat = mysqli_query($bdd, $query);
+
+	}
+
+	/*$resource = mysqli_query($bdd, "SELECT COUNT(*) FROM livre");
+    $row = mysql_fetch_array($resource);*/
 	
 	while($donnees = mysqli_fetch_array($resultat))
 	{
 		$empQuery = "SELECT * FROM emplacement WHERE id_emplacement = '$donnees[id_emplacement]'";
 		$result = $bdd->query($empQuery);
 		$row = $result->fetch_row();
-	
+		$allRows[] = $donnees;
 		?>
 		<tr class="pop">
 			<td class="hide"><?php echo $donnees['id_livre']; ?></td>
@@ -22,12 +44,39 @@
 			<td class="hide"><?php echo utf8_encode($donnees['sommaire_livre']); ?></td>
 			<td class="hide"><?php echo utf8_encode($donnees['note_livre']); ?></td>
 			<td class="hide"><?php echo utf8_encode($row[0]); ?></td>
-		</tr>		
+		</tr>
+		<script type='text/javascript' src="../js/popupLivre.js"></script>		
 		<?php
 	}
+
+	//TODO: FISNISH COUNTTTT
+
+    $arr = explode("LIMIT", $query, 2);
+    $first = $arr[0];
+
+    $resultat = mysqli_query($bdd, $first);
+    $data = mysqli_num_rows($resultat);
+	$numberOfRows = $data;
+
+	?>
+
+	<div id="customQuery" style="display: none;">
+		<?php echo $customQuery ?>
+	</div>
+
+	<div id="hiddenNumberOfRows" style="display: none;">
+		<?php echo $numberOfRows ?>
+	</div>
+
+	<?php
 	
-	mysqli_close($bdd);
+	
 	
 	if(isset($_SESSION['rechercheLivre']))
 		unset($_SESSION['rechercheLivre']);
 ?>
+
+<script>
+    var number = $("#hiddenNumberOfRows").html();
+	$("#numberOfRows").html("Items trouvés : " + number);
+</script>

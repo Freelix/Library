@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Liste des films</title>
-<meta name="keywords" content="simple, grid, theme, free templates, web design, one page layout, slategray, steelblue, templatemo, CSS, HTML" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <link href="../css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../css/table.css" type="text/css"/>
 <link rel="stylesheet" href="../css/popupFilm.css" type="text/css"/>

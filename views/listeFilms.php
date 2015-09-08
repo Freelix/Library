@@ -11,7 +11,82 @@
 <link rel="stylesheet" href="../css/popupFilm.css" type="text/css"/>
 <link rel="stylesheet" href="../css/menu_style.css" type="text/css"/>
 <script type='text/javascript' src="../js/jquery-1.9.1.min.js"></script>
-<script type='text/javascript' src="../js/popupFilm.js"></script>
+<script type='text/javascript' src="../js/helper.js"></script>
+
+<script>
+    $(document).ready(function() {
+    	var pageNumber = 0;
+    	var totalRows = $("#hiddenNumberOfRows").html();
+
+		$('#arrowRightFilm').click(function() {
+	        // Make a new request
+	        var tempPageNumber = pageNumber;
+	        pageNumber = pageNumber + 5;
+
+	        if (totalRows > pageNumber) {
+	        	$("#tableFilm > tbody").empty();
+
+			    var customQuery = $("#customQuery").html();
+
+			    ajaxRequest = $.ajax({
+		            url: "../elements/afficherFilm.php",
+		            type: "POST",
+		            dataType: "html",
+		            data: { data: pageNumber, cq: customQuery }
+		        });
+
+		        ajaxRequest.done(function(response, textStatus, jqXHR) {
+		        	$('#tableFilm tbody').append(response);
+		        });
+
+		        ajaxRequest.fail(function(jqXHR, textStatus) {
+		        });
+		    }
+		    else
+		    	pageNumber = tempPageNumber;
+	    });
+
+	    $('#arrowLeftFilm').click(function() {
+	        // Make a new request
+	        pageNumber = pageNumber - 5;
+
+	        if (pageNumber >= 0) {
+	        	$("#tableFilm > tbody").empty();
+
+	        	var customQuery = $("#customQuery").html();
+
+			    ajaxRequest = $.ajax({
+		            url: "../elements/afficherFilm.php",
+		            type: "POST",
+		            dataType: "html",
+		            data: { data: pageNumber, cq: customQuery }
+		        });
+
+		        ajaxRequest.done(function(response, textStatus, jqXHR) {
+		        	$('#tableFilm tbody').append(response);
+		        });
+
+		        ajaxRequest.fail(function(jqXHR, textStatus) {
+		        });
+	    	}
+	    	else
+	    		pageNumber = 0;
+	    });
+
+	    $("#emplacementDropDown").change(function() {
+			setImageEmplacement();
+		});
+
+	    $("#emplacementDropDown").mouseover(function(){
+		    $("#popupEmplacement").show();
+		});
+	
+		$("#emplacementDropDown").mouseout(function(){
+	        $("#popupEmplacement").hide();
+	    });
+    });
+</script>
+
 </head>  
  
 <body>
@@ -32,7 +107,7 @@
 	<textarea class="textAreaPop" name="noteFilmPop" id ="noteMovie"></textarea><br/>
 	
 	<label class="labelPop">Emplacement du film: </label><br/>
-	<?php include("../elements/afficherEmplacementAreaPop.php") ?><br/><br/>
+	<?php include("../elements/afficherEmplacement.php") ?><br/><br/>
 	
 	<input type="submit" class="buttonPop" value="Enregistrer" />
 	<a href="#" id="closePop">Fermer</a>
@@ -66,9 +141,11 @@
                 
     	</div> 
 
+    	<label id="numberOfRows"></label>
+
     	<div id="home" class="tableau">
 			<div class="CSS_Table_Example">
-				<table>
+				<table id="tableFilm">
 					<tr>
 						<th>Titre du film</th>
 						<th>Réalisateur du film</th>
@@ -78,6 +155,9 @@
 				</table>
 			</div>
 		</div> <!-- END of home -->
+
+		<i id="arrowLeftFilm" class="arrowLeft fa fa-arrow-left fa-3x"></i>
+		<i id="arrowRightFilm" class="arrowRight fa fa-arrow-right fa-3x"></i>
 <!-- ===================================================== -->
     </div> <!-- END of -->
     
@@ -86,6 +166,12 @@
 <!-- ===================================================== -->
 
 </div> 
+
+<div>
+	<span id="popupEmplacement">
+		<img id="imgEmplacement" class="popupEmplacementImage" src="" alt="" />
+	</span>
+</div>
 
 </body>
 </html>

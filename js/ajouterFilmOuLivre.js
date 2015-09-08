@@ -7,6 +7,17 @@ $(document).ready(function() {
         }
     });
 
+    // Automatically send the form with the scanner
+
+    $('#isbn').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        if (keycode == 9834) // 9834 --> ♪ --> symbol used by my scanner
+        {
+            $("#btnSearchISBN").trigger("click");
+        }
+    });
+
     // Initialize the plugin
     $('#my_popup').popup({
         color: 'white',
@@ -71,8 +82,7 @@ $(document).ready(function() {
 
         ajaxRequest.fail(function(jqXHR, textStatus) {
             $("#result").css("color", "red");
-            $("#result").html('There is error while submit');
-            console.log("request failed " + textStatus);
+            $("#result").html('Aucun résultat trouvé');
         });
 
         return false;
@@ -84,6 +94,8 @@ $(document).ready(function() {
         $("#editLivre").val("");
         $("#sommLivre").val("");
         $("#notLivre").val("");
+        $("#publishedDate").val("");
+        $("#pageCount").val("");
 
         $("#result").html("");
     }
@@ -95,6 +107,8 @@ $(document).ready(function() {
         $("#editLivre").val(response[0].editeurLivre);
         $("#sommLivre").val(response[0].sommaireLivre);
         $("#notLivre").val(response[0].noteLivre);
+        $("#publishedDate").val(response[0].publishedDate);
+        $("#pageCount").val(response[0].pageCount);
 
         // Popup
         $("#scannerNomLivre").html(response[0].nomLivre);
@@ -102,6 +116,8 @@ $(document).ready(function() {
         $("#scannerEditeurLivre").html(response[0].editeurLivre);
         $("#scannerSommaireLivre").html(response[0].sommaireLivre);
         $("#scannerNotesLivre").html(response[0].noteLivre);
+        $("#scannerPublishedDateLivre").html(response[0].publishedDate);
+        $("#scannerPageCountLivre").html(response[0].pageCount);
 
         $('#my_popup').popup('show');
     }

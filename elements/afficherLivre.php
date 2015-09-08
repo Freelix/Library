@@ -22,7 +22,6 @@
 	{
 		$query = "SELECT * FROM livre LIMIT " . $pageNumber . ", 5";
 		$resultat = mysqli_query($bdd, $query);
-
 	}
 	
 	while($donnees = mysqli_fetch_array($resultat))
@@ -66,6 +65,8 @@
 	</div>
 
 	<?php
+
+	mysqli_close($bdd);
 	
 	if(isset($_SESSION['rechercheLivre']))
 		unset($_SESSION['rechercheLivre']);

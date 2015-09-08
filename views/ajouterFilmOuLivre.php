@@ -114,7 +114,7 @@
                     <label for="author">Code barre : </label>
                     <input type="text" id="isbn" name="isbn" value="9782714449689" class="required input_field" />
                     </br>
-                    <input type="submit" value="Rechercher le code barre" class="submit_btn float_l" />
+                    <input id="btnSearchISBN" type="submit" value="Rechercher le code barre" class="submit_btn float_l" />
                   </form>
 
                   <div id="result" class="message"></div>

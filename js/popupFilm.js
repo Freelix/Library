@@ -24,6 +24,8 @@ $(document).ready(function(){
 		$('#noteMovie').val(noteFilm);
 
 		$("#supprimerPop").attr("href", "../elements/supprimerFilm.php?id=" + idNoFilm);
+
+		setImageEmplacement();
 	});
 	 
 	// Close popup

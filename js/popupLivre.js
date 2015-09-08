@@ -39,7 +39,7 @@ $(document).ready(function(){
 	 
 	// Close popup
 	$("#closePop").click(function(){
-	$("#overlay_form").fadeOut(500);
+	    $("#overlay_form").fadeOut(500);
 	});
 });
  

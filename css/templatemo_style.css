@@ -248,4 +248,39 @@ td
 	font-size: 20px;
 }
 
+/* Emplacement */
+
+#btnUploadImage
+{
+	position: relative;
+	left: -55px;
+	top: 30px;
+}
+
+.imgEmplacement
+{
+	width:304px;
+	height:228px;
+	float: right;
+	position: relative;
+	bottom: 150px;
+	clear: both;
+	display: inline-block;
+}
+
+#popupEmplacement
+{
+	display: none;
+}
+
+.popupEmplacementImage
+{
+	width: 304px;
+	height: 228px;
+	position: fixed;
+    right: 50px;
+    top: 50%;
+    display: table-cell;
+}
+
 #contact_form form select { width: 450px; padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-bottom: 20px;}

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="../css/popupLivre.css" type="text/css"/>
 <link rel="stylesheet" href="../css/menu_style.css" type="text/css"/>
 <script type='text/javascript' src="../js/jquery-1.9.1.min.js"></script>
+<script type='text/javascript' src="../js/helper.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -71,6 +72,18 @@
 	    	else
 	    		pageNumber = 0;
 	    });
+
+	    $("#emplacementDropDown").change(function() {
+			setImageEmplacement();
+		});
+
+	    $("#emplacementDropDown").mouseover(function(){
+		    $("#popupEmplacement").show();
+		});
+	
+		$("#emplacementDropDown").mouseout(function(){
+	        $("#popupEmplacement").hide();
+	    });
     });
 </script>
 
@@ -95,9 +108,15 @@
 	
 	<label class="labelPop">Notes: </label><br/>
 	<textarea class="textAreaPop" name="noteLivrePop" id ="noteLiv"></textarea><br/>
+
+	<label class="labelPop">Date publiée: </label><br/>
+	<input type="text" class="textPop" name="publishedDatePop" id="publishedDateLiv"/><br/>
+
+	<label class="labelPop">Nombre de pages: </label><br/>
+	<input type="text" class="textPop" name="pageCountPop" id="pageCountLiv"/><br/>
 	
 	<label class="labelPop">Emplacement: </label><br/>
-	<?php include("../elements/afficherEmplacementAreaPop.php") ?><br/><br/>
+	<?php include("../elements/afficherEmplacement.php") ?><br/><br/>
 	
 	<input type="submit" class="buttonPop" value="Enregistrer" />
 	<a href="#" id="closePop">Fermer</a>
@@ -162,7 +181,13 @@
     <?php include("../elements/footer.php"); ?>
 <!-- ===================================================== -->
 
-</div> 
+</div>
+
+<div>
+	<span id="popupEmplacement">
+		<img id="imgEmplacement" class="popupEmplacementImage" src="" alt="" />
+	</span>
+</div>
 
 </body>
 </html>

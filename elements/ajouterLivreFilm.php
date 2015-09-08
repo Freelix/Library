@@ -12,7 +12,9 @@
 		$_SESSION['editeur'] = $_POST['editeurLivre'];
 		$_SESSION['sommaire'] = $_POST['sommaireLivre'];
 		$_SESSION['note'] = $_POST['noteLivre'];
-		
+		$_SESSION['publishedDate'] = $_POST['publishedDate'];
+		$_SESSION['pageCount'] = $_POST['pageCount'];
+
 		header("Location: ../views/ajouterFilmOuLivre.php");
 		exit();
 	}
@@ -22,7 +24,8 @@
 	$empLivre = utf8_decode($_POST['emplacementDropDown']);
 	$editLivre = utf8_decode($_POST['editeurLivre']);
 	$sommLivre = utf8_decode($_POST['sommaireLivre']);
-	$noteLivre = utf8_decode($_POST['noteLivre']);
+	$publishedDate = utf8_decode($_POST['publishedDate']);
+	$pageCount = utf8_decode($_POST['pageCount']);
 	
 	$nLivre = str_replace("'", "''", $nLivre);
 	$autLivre = str_replace("'", "''", $autLivre);
@@ -30,16 +33,20 @@
 	$editLivre = str_replace("'", "''", $editLivre);
 	$sommLivre = str_replace("'", "''", $sommLivre);
 	$noteLivre = str_replace("'", "''", $noteLivre);
+	$publishedDate = str_replace("'", "''", $publishedDate);
+	$pageCount = str_replace("'", "''", $pageCount);
 	
 	if($_POST['LivreOrFilm'] == 'Livre')
 	{	
-		$query = "INSERT INTO livre(nom_livre, auteur_livre, id_emplacement, editeur_livre, sommaire_livre, note_livre) VALUES(
+		$query = "INSERT INTO livre(nom_livre, auteur_livre, id_emplacement, editeur_livre, sommaire_livre, note_livre, publishedDate, pageCount) VALUES(
 			'$nLivre', 
 			'$autLivre', 
 			'$empLivre',
 			'$editLivre',
 			'$sommLivre',
-			'$noteLivre')";		
+			'$noteLivre',
+			'$publishedDate',
+			'$pageCount')";		
 	}
 	else
 	{

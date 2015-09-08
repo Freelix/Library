@@ -23,24 +23,36 @@
 			exit(1);
 		}
 		
-		$result2 = $bdd->query($attacheAFilm);
-		$row2 = $result2->fetch_row();
+		$result = $bdd->query($attacheAFilm);
+		$row = $result->fetch_row();
 		
-		if($row2[0] != 0){
+		if($row[0] != 0){
 			$_SESSION['message'] = "Cet emplacement est utilisé pour un film, vous ne pouvez pas le supprimer.";
 			$_SESSION['validDelete'] = false;
 			mysqli_close($bdd);
 			header("Location: ../views/listeEmplacements.php");
 			exit(1);
 		}
+
+		// Delete File
+		$query = "SELECT image_emplacement FROM emplacement WHERE
+			id_emplacement = '$_POST[emplacementDropDown]'";
+
+	    $result = $bdd->query($query);
+	    $row = $result->fetch_row();
+
+	    if (!empty($row[0]))
+	    	unlink($row[0]);
 		
-		$_SESSION['message'] = "L'emplacement a bien été supprimé.";	
-		$_SESSION['validDelete'] = true;
-		
+		// Delete Row
 		$query = "DELETE FROM emplacement WHERE
 			id_emplacement = '$_POST[emplacementDropDown]'";
-		
-		mysqli_query($bdd, $query);
+
+        mysqli_query($bdd, $query);
+
+        $_SESSION['message'] = "L'emplacement a bien été supprimé.";	
+		$_SESSION['validDelete'] = true;
+			
 		mysqli_close($bdd);
 	}
 	

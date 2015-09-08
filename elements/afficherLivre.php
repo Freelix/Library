@@ -24,9 +24,6 @@
 		$resultat = mysqli_query($bdd, $query);
 
 	}
-
-	/*$resource = mysqli_query($bdd, "SELECT COUNT(*) FROM livre");
-    $row = mysql_fetch_array($resource);*/
 	
 	while($donnees = mysqli_fetch_array($resultat))
 	{
@@ -43,13 +40,13 @@
 			<td class="hide"><?php echo utf8_encode($donnees['editeur_livre']); ?></td>
 			<td class="hide"><?php echo utf8_encode($donnees['sommaire_livre']); ?></td>
 			<td class="hide"><?php echo utf8_encode($donnees['note_livre']); ?></td>
+			<td class="hide"><?php echo utf8_encode($donnees['publishedDate']); ?></td>
+			<td class="hide"><?php echo utf8_encode($donnees['pageCount']); ?></td>
 			<td class="hide"><?php echo utf8_encode($row[0]); ?></td>
 		</tr>
 		<script type='text/javascript' src="../js/popupLivre.js"></script>		
 		<?php
 	}
-
-	//TODO: FISNISH COUNTTTT
 
     $arr = explode("LIMIT", $query, 2);
     $first = $arr[0];
@@ -69,8 +66,6 @@
 	</div>
 
 	<?php
-	
-	
 	
 	if(isset($_SESSION['rechercheLivre']))
 		unset($_SESSION['rechercheLivre']);

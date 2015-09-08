@@ -8,19 +8,27 @@
 
 <link href="../css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src="../js/jquery-1.9.1.min.js"></script>
+<script type='text/javascript' src="../js/helper.js"></script>
 <link rel="stylesheet" href="../css/menu_style.css" type="text/css"/>
 
 <script>
 $(document).ready(function(){
-	$("#filmOuLivre").change(function() {
-		if ($("#filmOuLivre").val() == "Film"){
-			$("#infosLivre").fadeOut("slow");
-		}	
-		else{
-			$("#infosLivre").fadeIn("slow");
-		}
+	$("#emplacementDropDown").change(function() {
+		setImageEmplacement();
 	});
 });
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imgEmplacement').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 
 </head>   
@@ -48,13 +56,17 @@ $(document).ready(function(){
 					</br>
 					<input type="submit" value="Supprimer" class="submit_btn float_l" />
 				</form>
-				</br></br></br></br>
-				<form method="post" name="ajout" action="../elements/ajouterEmplacement.php">	
+				
+				<form method="post" enctype="multipart/form-data" name="ajout" action="../elements/ajouterEmplacement.php">	
 					<label>Ajouter un emplacement : </label> 
-					<input type="text" name="nomEmplacement" class="required input_field" />
+					<input id="inputEmplacement" type="text" name="nomEmplacement" class="required input_field" />
+
+					<img id="imgEmplacement" class="imgEmplacement" src="" alt="" />
 					
-					</br>
-					<input type="submit" value="Ajouter" class="submit_btn float_l" />
+					<br/>
+					<input id="btnSubmitEmplacement" type="submit" value="Ajouter" class="submit_btn float_l" />
+					<br/>
+					<input id="btnUploadImage" name="image" type='file' onchange="readURL(this);" />
 				</form>            
     		</div> 
 		</div> <!-- END of about -->

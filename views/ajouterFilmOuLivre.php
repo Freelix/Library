@@ -38,6 +38,12 @@
       <label class="labelTitle">Notes reliées au livre</label>
       <label id="scannerNotesLivre" class="labelGeneral"></label>
 
+      <label class="labelTitle">Date publiée</label>
+      <label id="scannerPublishedDateLivre" class="labelGeneral"></label>
+
+      <label class="labelTitle">Nombre de pages</label>
+      <label id="scannerPageCountLivre" class="labelGeneral"></label>
+
       <div class="my_popup_bottom">
         <button id="my_popup_modify" class="my_popup_btn">Corriger</button>
         <button id="my_popup_ok" class="my_popup_btn">Ok</button>
@@ -67,21 +73,25 @@
                   <label for="author">Auteur/Réalisateur : </label>
                   <input type="text" name="auteurLivre" id="auteurLivre" value="<?php if(isset($_SESSION['nomAuteur'])) echo utf8_encode($_SESSION['nomAuteur']); ?>" class="required input_field" />
 
-                  <div id="infosLivre">
+                  <div class="infosLivre">
                     <label for="author">Éditeur : </label>
                     <input type="text" name="editeurLivre" id="editLivre" value="<?php if(isset($_SESSION['editeur'])) echo utf8_encode($_SESSION['editeur']); ?>" class="required input_field" />
                   </div>
 
                   <label for="author">Sommaire : </label>
-                  <textarea name="sommaireLivre" id="sommLivre" class="required input_large_field">
-                    <?php if(isset($_SESSION['sommaire'])) echo utf8_encode($_SESSION['sommaire']); ?>
-                  </textarea>
+                  <textarea name="sommaireLivre" id="sommLivre" class="required input_large_field"><?php if(isset($_SESSION['sommaire'])) echo utf8_encode($_SESSION['sommaire']); ?></textarea>
 
                   <label for="author">Notes : </label>
-                  <textarea name="noteLivre" id="notLivre" class="required input_large_field">
-                    <?php if(isset($_SESSION['note'])) echo utf8_encode($_SESSION['note']); ?>
-                  </textarea>
+                  <textarea name="noteLivre" id="notLivre" class="required input_large_field"><?php if(isset($_SESSION['note'])) echo utf8_encode($_SESSION['note']); ?></textarea>
 
+                  <div class="infosLivre">
+                    <label>Date publiée : </label>
+                    <input type="text" name="publishedDate" id="publishedDate" value="<?php if(isset($_SESSION['publishedDate'])) echo utf8_encode($_SESSION['publishedDate']); ?>" class="required input_field" />
+
+                    <label>Nombre de pages : </label>
+                    <input type="text" name="pageCount" id="pageCount" value="<?php if(isset($_SESSION['pageCount'])) echo utf8_encode($_SESSION['pageCount']); ?>" class="required input_field" />
+                  </div>
+                  
                   <label for="author">Emplacement du livre/film : </label>
                   <?php include("../elements/afficherEmplacement.php") ?>
 
@@ -95,22 +105,20 @@
                     <input type="submit" value="Ajouter" class="submit_btn float_l" />
                 </form>
 
-                </br>
-                </br>
-                </br>
-
-                <h4>Faire une recherche avec le code barre</h4>
-                <h6>Sélectionner la zone de texte et scanner le livre:</h6>
-                </br>
-
-                <form id="researchForm" name="recherche" method="post" action="../XMLParser.php">
-                  <label for="author">Code barre : </label>
-                  <input type="text" id="isbn" name="isbn" value="9782714449689" class="required input_field" />
+                <div class="infosLivre">
+                  <h4>Faire une recherche avec le code barre</h4>
+                  <h6>Sélectionner la zone de texte et scanner le livre:</h6>
                   </br>
-                  <input type="submit" value="Rechercher le code barre" class="submit_btn float_l" />
-                </form>
 
-                <div id="result" class="message"></div>
+                  <form id="researchForm" name="recherche" method="post" action="../XMLParser.php">
+                    <label for="author">Code barre : </label>
+                    <input type="text" id="isbn" name="isbn" value="9782714449689" class="required input_field" />
+                    </br>
+                    <input type="submit" value="Rechercher le code barre" class="submit_btn float_l" />
+                  </form>
+
+                  <div id="result" class="message"></div>
+                </div>
               </div>
               <!-- END of about -->
               <?php include("../elements/afficherMessage.php"); ?>

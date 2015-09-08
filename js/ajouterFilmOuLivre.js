@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $("#filmOuLivre").change(function() {
         if ($("#filmOuLivre").val() == "Film") {
-            $("#infosLivre").fadeOut("slow");
+            $(".infosLivre").fadeOut("slow");
         } else {
-            $("#infosLivre").fadeIn("slow");
+            $(".infosLivre").fadeIn("slow");
         }
     });
 

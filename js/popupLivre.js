@@ -14,7 +14,7 @@ $(document).ready(function(){
 		var auteurLivre = $(this).children().eq(2).text();
 		$('#auteurLiv').val(auteurLivre);
 		
-		var emplacementLivre = $(this).children().eq(7).text();
+		var emplacementLivre = $(this).children().eq(9).text();
 		$('#emplacementDropDown').val(emplacementLivre);
 		
 		var editeurLivre = $(this).children().eq(4).text();
@@ -26,7 +26,15 @@ $(document).ready(function(){
 		var noteLivre = $(this).children().eq(6).text();
 		$('#noteLiv').val(noteLivre);
 
+		var publishedDate = $(this).children().eq(7).text();
+		$('#publishedDateLiv').val(publishedDate);
+
+		var pageCount = $(this).children().eq(8).text();
+		$('#pageCountLiv').val(pageCount);
+
 		$("#supprimerPop").attr("href", "../elements/supprimerLivre.php?id=" + idNoLivre);
+
+		setImageEmplacement();
 	});
 	 
 	// Close popup

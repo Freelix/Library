@@ -14,6 +14,8 @@
 	$editLivre = utf8_decode($_POST['editeurLivrePop']);
 	$sommLivre = utf8_decode($_POST['sommaireLivrePop']);
 	$noteLivre = utf8_decode($_POST['noteLivrePop']);
+	$publishedDate = utf8_decode($_POST['publishedDatePop']);
+	$pageCount = utf8_decode($_POST['pageCountPop']);
 	
 	$nLivre = str_replace("'", "''", $nLivre);
 	$autLivre = str_replace("'", "''", $autLivre);
@@ -21,6 +23,8 @@
 	$editLivre = str_replace("'", "''", $editLivre);
 	$sommLivre = str_replace("'", "''", $sommLivre);
 	$noteLivre = str_replace("'", "''", $noteLivre);
+	$publishedDate = str_replace("'", "''", $publishedDate);
+	$pageCount = str_replace("'", "''", $pageCount);
 	
 	$query = "UPDATE livre SET
 		nom_livre = '$nLivre',
@@ -28,7 +32,9 @@
 		id_emplacement = '$empLivre',
 		editeur_livre = '$editLivre',
 		sommaire_livre = '$sommLivre',
-		note_livre = '$noteLivre'
+		note_livre = '$noteLivre',
+		publishedDate = '$publishedDate',
+		pageCount = '$pageCount'
 		WHERE id_livre = '$_POST[idLivrePop]'";
 	
 	mysqli_query($bdd, $query);

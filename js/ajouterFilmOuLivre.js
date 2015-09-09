@@ -8,7 +8,6 @@ $(document).ready(function() {
     });
 
     // Automatically send the form with the scanner
-
     $('#isbn').keypress(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
@@ -16,6 +15,19 @@ $(document).ready(function() {
         {
             $("#btnSearchISBN").trigger("click");
         }
+    });
+
+    // Show locations in popup on mouseover
+    $("#emplacementDropDown").change(function() {
+        setImageEmplacement();
+    });
+
+    $("#emplacementDropDown").mouseover(function(){
+        $("#popupEmplacement").show();
+    });
+
+    $("#emplacementDropDown").mouseout(function(){
+        $("#popupEmplacement").hide();
     });
 
     // Initialize the plugin
@@ -77,12 +89,48 @@ $(document).ready(function() {
         });
 
         ajaxRequest.done(function(response, textStatus, jqXHR) {
+            $("#isbn").val("");
             FillFields(response);
         });
 
         ajaxRequest.fail(function(jqXHR, textStatus) {
+            $("#isbn").val("");
             $("#result").css("color", "red");
             $("#result").html('Aucun résultat trouvé');
+        });
+
+        return false;
+    });
+
+    $('#addForm').on('submit', function(e) {
+        e.preventDefault();
+
+        ajaxRequest = $.ajax({
+            url: "../elements/ajouterLivreFilm.php",
+            dataType: "html",
+            type: "POST",
+            data: $(this).serialize()
+        });
+
+        ajaxRequest.done(function(response, textStatus, jqXHR) {
+            ClearTextBox();
+            $("#isbn").val("");
+
+            $("#result").css("color", "green");
+            $("#result").html(response);
+
+            $("html, body").animate({
+                scrollTop: $(document).height() - $(window).height()
+            });
+        });
+
+        ajaxRequest.fail(function(xhr, textStatus, error) {
+            $("#result").css("color", "red");
+            $("#result").html(xhr.responseText);
+
+            $("html, body").animate({
+                scrollTop: $(document).height() - $(window).height()
+            });
         });
 
         return false;

@@ -1,6 +1,8 @@
 <?php
 	$isbn = $_POST["data"];
 	$googleId = "AIzaSyDGgd3jmF7-BuVhGdlhsYLovQHNMBe0K_4";
+
+	// Test ISBN : 9782714449689
 	
 	// Get the book id
 	$url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $isbn;

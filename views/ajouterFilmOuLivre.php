@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/menu_style.css" type="text/css" />
     <script type='text/javascript' src="../js/jquery-1.9.1.min.js"></script>
     <script type='text/javascript' src="../js/ajouterFilmOuLivre.js"></script>
+    <script type='text/javascript' src="../js/helper.js"></script>
 
     <!-- Include jQuery Popup Overlay -->
     <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.10/jquery.popupoverlay.js"></script>
@@ -112,13 +113,13 @@
 
                   <form id="researchForm" name="recherche" method="post" action="../XMLParser.php">
                     <label for="author">Code barre : </label>
-                    <input type="text" id="isbn" name="isbn" value="9782714449689" class="required input_field" />
+                    <input type="text" id="isbn" name="isbn" class="required input_field" />
                     </br>
                     <input id="btnSearchISBN" type="submit" value="Rechercher le code barre" class="submit_btn float_l" />
                   </form>
-
-                  <div id="result" class="message"></div>
                 </div>
+
+                <div id="result" class="message"></div>
               </div>
               <!-- END of about -->
               <?php include("../elements/afficherMessage.php"); ?>
@@ -132,6 +133,12 @@
 
           </div>
 
+          <div>
+            <span id="popupEmplacement">
+              <img id="imgEmplacement" class="popupEmplacementImage" src="" alt="" />
+            </span>
+          </div>
+          
   </body>
 
   </html>

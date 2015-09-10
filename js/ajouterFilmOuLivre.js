@@ -54,21 +54,40 @@ $(document).ready(function() {
     $("#my_popup_ok").click(function() {
         $('#my_popup').popup('hide');
 
-        $.post('../elements/ajouterLivreFilm.php', $('#addForm').serialize());
+        //$.post('../elements/ajouterLivreFilm.php', $('#addForm').serialize());
 
-        ClearTextBox();
-        $("#isbn").val("");
-
-        $("html, body").animate({
-            scrollTop: $(document).height() - $(window).height()
+        ajaxRequest = $.ajax({
+            url: "../elements/ajouterLivreFilm.php",
+            dataType: "html",
+            type: "POST",
+            data: $("#addForm").serialize()
         });
 
-        // Workaround to focus with Chrome
-        setTimeout(function() {
-            $("#isbn").focus();
+        ajaxRequest.done(function(response, textStatus, jqXHR) {
+            ClearTextBox();
+            $("#isbn").val("");
+
             $("#result").css("color", "green");
-		    $("#result").html("L'item a bien été ajouté");
-        }, 1);
+            $("#result").html(response);
+
+            $("html, body").animate({
+                scrollTop: $(document).height() - $(window).height()
+            });
+        });
+
+        ajaxRequest.fail(function(xhr, textStatus, error) {
+            $("#result").css("color", "red");
+            $("#result").html(xhr.responseText);
+
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'slow', function() {});
+
+            // Workaround to focus with Chrome
+            setTimeout(function() {
+                $("#nomLivre").focus();
+            }, 1);
+        });
     });
 
     $('#researchForm').on('submit', function(e) {
@@ -80,24 +99,30 @@ $(document).ready(function() {
 
         /* Get from elements values */
         var value = $("#isbn").val();
+        
+        if (value != "" && value.match(/^\d+$/)) {        
+            ajaxRequest = $.ajax({
+                url: "../ISBNRequests/JSONParser.php",
+                dataType: "JSON",
+                type: "POST",
+                data: { data: value }
+            });
 
-        ajaxRequest = $.ajax({
-            url: "../XMLParser.php",
-            dataType: "JSON",
-            type: "POST",
-            data: { data: value }
-        });
+            ajaxRequest.done(function(response, textStatus, jqXHR) {
+                $("#isbn").val("");
+                FillFields(response);
+            });
 
-        ajaxRequest.done(function(response, textStatus, jqXHR) {
-            $("#isbn").val("");
-            FillFields(response);
-        });
-
-        ajaxRequest.fail(function(jqXHR, textStatus) {
-            $("#isbn").val("");
+            ajaxRequest.fail(function(jqXHR, textStatus) {
+                $("#isbn").val("");
+                $("#result").css("color", "red");
+                $("#result").html('Aucun résultat trouvé');
+            });
+        }
+        else {
             $("#result").css("color", "red");
-            $("#result").html('Aucun résultat trouvé');
-        });
+            $("#result").html('Vous devez inscrire un code numérique');
+        }
 
         return false;
     });

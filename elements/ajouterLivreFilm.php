@@ -4,7 +4,7 @@
 
 	$message = "";
 	
-	if (empty($_POST['nomLivre']) OR empty($_POST['auteurLivre']) OR empty($_POST['emplacementDropDown']))
+	if (empty($_POST['nomLivre']) OR $_POST['auteurLivre'] == "" OR empty($_POST['emplacementDropDown']))
 	{
         header("HTTP/1.0 406 Not Acceptable");
 		$message = "Le nom, l'auteur et l'emplacement doivent être renseignés.";

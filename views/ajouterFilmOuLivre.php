@@ -111,7 +111,7 @@
                   <h6>Sélectionner la zone de texte et scanner le livre:</h6>
                   </br>
 
-                  <form id="researchForm" name="recherche" method="post" action="../XMLParser.php">
+                  <form id="researchForm" name="recherche">
                     <label for="author">Code barre : </label>
                     <input type="text" id="isbn" name="isbn" class="required input_field" />
                     </br>

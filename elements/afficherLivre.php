@@ -14,13 +14,13 @@
 	if (isset($_SESSION['rechercheLivre']) && strlen($_SESSION["rechercheLivre"]) > 4) // customQuery.length = 4
 	{
 		$customQuery = $_SESSION["rechercheLivre"];
-		$_SESSION["rechercheLivre"] = $_SESSION["rechercheLivre"] . " LIMIT " . $pageNumber . ", 5";
+		$_SESSION["rechercheLivre"] = $_SESSION["rechercheLivre"] . " ORDER BY nom_livre LIMIT " . $pageNumber . ", 5";
 		$query = $_SESSION['rechercheLivre'];
 		$resultat = mysqli_query($bdd, $query);	
 	}
 	else
 	{
-		$query = "SELECT * FROM livre LIMIT " . $pageNumber . ", 5";
+		$query = "SELECT * FROM livre ORDER BY nom_livre LIMIT " . $pageNumber . ", 5";
 		$resultat = mysqli_query($bdd, $query);
 	}
 	
@@ -33,15 +33,15 @@
 		?>
 		<tr class="pop">
 			<td class="hide"><?php echo $donnees['id_livre']; ?></td>
-			<td><?php echo utf8_encode($donnees['nom_livre']); ?></td>
-			<td><?php echo utf8_encode($donnees['auteur_livre']); ?></td>
-			<td><?php echo utf8_encode($row[1]); ?></td>
-			<td class="hide"><?php echo utf8_encode($donnees['editeur_livre']); ?></td>
-			<td class="hide"><?php echo utf8_encode($donnees['sommaire_livre']); ?></td>
-			<td class="hide"><?php echo utf8_encode($donnees['note_livre']); ?></td>
-			<td class="hide"><?php echo utf8_encode($donnees['publishedDate']); ?></td>
-			<td class="hide"><?php echo utf8_encode($donnees['pageCount']); ?></td>
-			<td class="hide"><?php echo utf8_encode($row[0]); ?></td>
+			<td><?php echo htmlspecialchars(utf8_encode($donnees['nom_livre'])); ?></td>
+			<td><?php echo htmlspecialchars(utf8_encode($donnees['auteur_livre'])); ?></td>
+			<td><?php echo htmlspecialchars(utf8_encode($row[1])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['editeur_livre'])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['sommaire_livre'])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['note_livre'])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['publishedDate'])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['pageCount'])); ?></td>
+			<td class="hide"><?php echo htmlspecialchars(utf8_encode($row[0])); ?></td>
 		</tr>
 		<script type='text/javascript' src="../js/popupLivre.js"></script>		
 		<?php

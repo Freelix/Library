@@ -21,7 +21,7 @@
 		$('#arrowRightFilm').click(function() {
 	        // Make a new request
 	        var tempPageNumber = pageNumber;
-	        pageNumber = pageNumber + 5;
+	        pageNumber = pageNumber + 20;
 
 	        if (totalRows > pageNumber) {
 	        	$("#tableFilm > tbody").empty();
@@ -48,7 +48,7 @@
 
 	    $('#arrowLeftFilm').click(function() {
 	        // Make a new request
-	        pageNumber = pageNumber - 5;
+	        pageNumber = pageNumber - 20;
 
 	        if (pageNumber >= 0) {
 	        	$("#tableFilm > tbody").empty();

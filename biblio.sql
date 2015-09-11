@@ -1,5 +1,6 @@
-
--- Version de PHP: 5.4.16
+-- Généré le :  Ven 11 Septembre 2015 à 22:21
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -11,10 +12,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `biblio`
+-- Base de données :  `biblio`
 --
-CREATE DATABASE IF NOT EXISTS `biblio` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `biblio`;
 
 -- --------------------------------------------------------
 
@@ -25,18 +24,20 @@ USE `biblio`;
 CREATE TABLE IF NOT EXISTS `emplacement` (
   `id_emplacement` int(10) NOT NULL AUTO_INCREMENT,
   `nom_emplacement` varchar(50) NOT NULL,
+  `image_emplacement` varchar(1024) NOT NULL,
   PRIMARY KEY (`id_emplacement`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Contenu de la table `emplacement`
 --
 
-INSERT INTO `emplacement` (`id_emplacement`, `nom_emplacement`) VALUES
-(9, 'Bibliothèque du salon #2'),
-(8, 'Bibliothèque du salon #1'),
-(10, 'Bibliothèque du salon #3'),
-(11, 'Bibliothèque de la chambre');
+INSERT INTO `emplacement` (`id_emplacement`, `nom_emplacement`, `image_emplacement`) VALUES
+(9, 'Bibliothèque du salon #2', ''),
+(8, 'Bibliothèque du salon #1', ''),
+(10, 'Bibliothèque du salon #3', ''),
+(11, 'Bibliothèque de la chambre', ''),
+(42, 'Emplacement secret', 'C:/wamp/www/Library/images/emplacements/Emplacement secret.jpg');
 
 -- --------------------------------------------------------
 
@@ -47,19 +48,19 @@ INSERT INTO `emplacement` (`id_emplacement`, `nom_emplacement`) VALUES
 CREATE TABLE IF NOT EXISTS `film` (
   `id_film` int(10) NOT NULL AUTO_INCREMENT,
   `nom_film` varchar(75) NOT NULL,
-  `realisateur_film` varchar(75) NOT NULL,
+  `realisateur_film` varchar(150) NOT NULL,
   `id_emplacement` int(10) NOT NULL,
-  `sommaire_film` varchar(500) NOT NULL,
-  `note_film` varchar(500) NOT NULL,
+  `sommaire_film` varchar(5000) NOT NULL,
+  `note_film` varchar(5000) NOT NULL,
   PRIMARY KEY (`id_film`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `film`
 --
 
 INSERT INTO `film` (`id_film`, `nom_film`, `realisateur_film`, `id_emplacement`, `sommaire_film`, `note_film`) VALUES
-(3, 'Gran Torino', 'Clint Eastwood', 11, 'Walt Kowalski est un ancien de la guerre de Corée, un homme inflexible, amer et pétri de préjugés surannés. Hormis sa chienne Daisy, il ne fait confiance qu''à son M-1, toujours propre, toujours prêt à l''usage... ', ''),
+(3, 'Gran Torino', 'Clint Eastwood', 42, 'Walt Kowalski est un ancien de la guerre de Corée, un homme inflexible, amer et pétri de préjugés surannés. Hormis sa chienne Daisy, il ne fait confiance qu''à son M-1, toujours propre, toujours prêt à l''usage... ', ''),
 (4, 'La Liste de Schindler', 'Steven Spielberg', 11, 'Evocation des années de guerre d''Oskar Schindler, industriel autrichien rentré à Cracovie en 1939 avec les troupes allemandes. Il va, tout au long de la guerre, protéger des juifs en les faisant travailler dans sa fabrique.', ''),
 (5, 'The Dark Knight, Le Chevalier Noir ', 'Christopher Nolan', 11, 'Batman entreprend de démanteler les dernières organisations criminelles de Gotham. Mais il se heurte bientôt à un nouveau génie du crime qui répand la terreur et le chaos dans la ville : le Joker... ', ''),
 (6, 'Le Parrain ', 'Francis Ford Coppola', 11, 'En 1945, à New York, les Corleone sont une des cinq familles de la mafia. Don Vito Corleone marie sa fille à un bookmaker. Sollozzo, "parrain" de la famille Tattaglia, propose à Don Vito une association dans le trafic de drogue...', ''),
@@ -77,26 +78,28 @@ INSERT INTO `film` (`id_film`, `nom_film`, `realisateur_film`, `id_emplacement`,
 CREATE TABLE IF NOT EXISTS `livre` (
   `id_livre` int(10) NOT NULL AUTO_INCREMENT,
   `nom_livre` varchar(75) NOT NULL,
-  `auteur_livre` varchar(75) NOT NULL,
+  `auteur_livre` varchar(150) NOT NULL,
   `id_emplacement` int(10) NOT NULL,
   `editeur_livre` varchar(75) NOT NULL,
-  `sommaire_livre` varchar(500) NOT NULL,
-  `note_livre` varchar(500) NOT NULL,
+  `sommaire_livre` varchar(5000) NOT NULL,
+  `note_livre` varchar(5000) NOT NULL,
+  `publishedDate` varchar(15) NOT NULL,
+  `pageCount` int(5) NOT NULL,
   PRIMARY KEY (`id_livre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
 
 --
 -- Contenu de la table `livre`
 --
 
-INSERT INTO `livre` (`id_livre`, `nom_livre`, `auteur_livre`, `id_emplacement`, `editeur_livre`, `sommaire_livre`, `note_livre`) VALUES
-(6, 'Le monde s''effondre', 'Chinua Achebe', 8, '', '', ''),
-(7, 'Le Père Goriot', 'Honoré de Balzac', 8, '', '', ''),
-(8, 'L''Étranger', 'Albert Camus', 9, '', '', ''),
-(9, 'Les Âmes mortes', 'Nicolas Gogol', 10, '', '', ''),
-(10, 'Odyssée', 'Homère', 10, '', '', ''),
-(11, 'Le Grondement de la montagne', 'Yasunari Kawabata', 9, '', '', ''),
-(12, 'Le Dit du Genji', 'Murasaki Shikibu', 9, '', '', '');
+INSERT INTO `livre` (`id_livre`, `nom_livre`, `auteur_livre`, `id_emplacement`, `editeur_livre`, `sommaire_livre`, `note_livre`, `publishedDate`, `pageCount`) VALUES
+(6, 'Le monde s''effondre', 'Chinua Achebe', 42, '', '', '', '2012-07-24', 735),
+(7, 'Le Père Goriot', 'Honoré de Balzac', 8, '', '', '', '', 0),
+(8, 'L''Étranger', 'Albert Camus', 9, '', '', '', '', 0),
+(9, 'Les Âmes mortes', 'Nicolas Gogol', 10, '', '', '', '', 0),
+(10, 'Odyssée', 'Homère', 10, '', 'fdasfsaf', '', '', 0),
+(11, 'Le Grondement de la montagne', 'Yasunari Kawabata', 9, '', '', '', '', 0),
+(12, 'Le Dit du Genji', 'Murasaki Shikibu', 9, '', '', '', '', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

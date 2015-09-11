@@ -21,7 +21,7 @@
 		$('#arrowRightLivre').click(function() {
 	        // Make a new request
 	        var tempPageNumber = pageNumber;
-	        pageNumber = pageNumber + 5;
+	        pageNumber = pageNumber + 20;
 
 	        if (totalRows > pageNumber) {
 	        	$("#tableLivre > tbody").empty();
@@ -48,7 +48,7 @@
 
 	    $('#arrowLeftLivre').click(function() {
 	        // Make a new request
-	        pageNumber = pageNumber - 5;
+	        pageNumber = pageNumber - 20;
 
 	        if (pageNumber >= 0) {
 	        	$("#tableLivre > tbody").empty();

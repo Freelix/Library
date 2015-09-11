@@ -13,7 +13,7 @@ function getRequest($url)
     $ch = curl_init();
 
     $ua = "Mozilla/5.0 (Windows NT 6.3; WOW64) 
-    	AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36";
     
     curl_setopt_array($ch, array(
         CURLOPT_RETURNTRANSFER => 1,
@@ -27,9 +27,9 @@ function getRequest($url)
     $html = curl_exec($ch);
     
     if(curl_errno($ch))
-	{
-	    echo 'Error: ' . curl_error($ch);
-	}
+    {
+        echo 'Error: ' . curl_error($ch);
+    }
     
     curl_close($ch);
     
@@ -49,53 +49,84 @@ function parseHTML($html, $isbn)
     
     $elements = $xpath->query("//cite[contains(concat(' ', normalize-space(@class), ' '), ' $class ')]");
     
-    foreach ($elements as $element) {
-    	$txt = $element->nodeValue;
+    foreach ($elements as $element) 
+    {
+        $txt = $element->nodeValue;
 
-    	if (strpos($txt, $strISBN) !== false || strpos($txt, $strID) !== false)  
-    	{
-    		// $a contains the first part (before $str)
-    		// and the second parameter the id
-    		list($a, $book) = explode("=", $txt);
+        if (strpos($txt, $strISBN) !== false || strpos($txt, $strID) !== false)  
+        {
+            // $a contains the first part (before $str)
+            // and the second parameter the id
+            list($a, $book) = explode("=", $txt);
 
-    		if (isTheRightBook($book, $isbn))
-    			break;
-    		else
-    			$book = "";
-		}
+            if (isTheRightBook($book, $isbn))
+                break;
+            else
+                $book = "";
+        }
     }
 
-    return $book;
+    if ($book != "")
+        return $book;
+
+    $class = 'rc';
+    $elements = $xpath->query("//div[contains(concat(' ', normalize-space(@class), ' '), ' $class ')]");
+
+    foreach ($elements as $element)
+    {
+        $href = $element->getElementsByTagName('h3')->item(0)->getElementsByTagName('a')->item(0)->getAttribute('href');
+
+        $book = get_string_between($href, $strID, "&dq=");
+
+        if ($book != "")
+            return $book;
+    }
+
+    return "";
+}
+
+function get_string_between($string, $start, $end)
+{
+    $string = " " . $string;
+    $ini = strpos($string,$start);
+    
+    if ($ini == 0) 
+        return "";
+    
+    $ini += strlen($start);
+    $len = strpos($string,$end,$ini) - $ini;
+    
+    return substr($string,$ini,$len);
 }
 
 // Check first characters to valided
 function isTheRightBook($book, $isbn)
 {
-	$regex = "/^[0-9]+$/";
+    $regex = "/^[0-9]+$/";
 
-	if (preg_match($regex, $book))
-	{
-		$pageISBN = $isbn;
-		
-		if (substr($isbn, 0, 3 ) === "978")
-			$pageISBN = substr($isbn, 3, 6);
+    if (preg_match($regex, $book))
+    {
+        $pageISBN = $isbn;
+        
+        if (substr($isbn, 0, 3 ) === "978")
+            $pageISBN = substr($isbn, 3, 6);
 
-		if (substr($book, 0, 6 ) === $pageISBN)
-			return true;
-		return false;
-	}
+        if (substr($book, 0, 6 ) === $pageISBN)
+            return true;
+        return false;
+    }
 
-	// It means it's an id, not an isbn
-	return true;
+    // It means it's an id, not an isbn
+    return true;
 }
 
 // For tests purpose
 function writeToFile($text)
 {
-	$file = "output.html";
+    $file = "output.html";
 
-	$myfile = fopen($file, "w") or die("Unable to open file!");
-	fwrite($myfile, $text);
+    $myfile = fopen($file, "w") or die("Unable to open file!");
+    fwrite($myfile, $text);
 }
 
 ?>

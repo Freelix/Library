@@ -1,6 +1,7 @@
 <?php
 	include("../connexion.php");
-    
+	
+	$pageLimit = 20; 
     $pageNumber = 0;
     $customQuery = "";
     $query = "";
@@ -14,13 +15,13 @@
 	if (isset($_SESSION['rechercheLivre']) && strlen($_SESSION["rechercheLivre"]) > 4) // customQuery.length = 4
 	{
 		$customQuery = $_SESSION["rechercheLivre"];
-		$_SESSION["rechercheLivre"] = $_SESSION["rechercheLivre"] . " ORDER BY nom_livre LIMIT " . $pageNumber . ", 5";
+		$_SESSION["rechercheLivre"] = $_SESSION["rechercheLivre"] . " ORDER BY nom_livre LIMIT " . $pageNumber . ", " . $pageLimit;
 		$query = $_SESSION['rechercheLivre'];
 		$resultat = mysqli_query($bdd, $query);	
 	}
 	else
 	{
-		$query = "SELECT * FROM livre ORDER BY nom_livre LIMIT " . $pageNumber . ", 5";
+		$query = "SELECT * FROM livre ORDER BY nom_livre LIMIT " . $pageNumber . ", " . $pageLimit;
 		$resultat = mysqli_query($bdd, $query);
 	}
 	

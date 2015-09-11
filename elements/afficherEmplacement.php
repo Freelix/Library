@@ -11,7 +11,7 @@
 	{
 		$array[] = $donnees['image_emplacement'];
 ?>
-		<option value="<?php echo $donnees['id_emplacement']; ?>"> <?php echo utf8_encode($donnees['nom_emplacement']); ?> </option>
+		<option value="<?php echo $donnees['id_emplacement']; ?>"> <?php echo htmlspecialchars_decode($donnees['nom_emplacement']); ?> </option>
 <?php
 	}
 ?>	

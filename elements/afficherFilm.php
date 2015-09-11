@@ -34,12 +34,12 @@
 		?>
 		<tr class="pop">
 			<td class="hide"><?php echo $donnees['id_film']; ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($donnees['nom_film'])); ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($donnees['realisateur_film'])); ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($row[1])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['sommaire_film'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['note_film'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($row[0])); ?></td>
+			<td><?php echo htmlspecialchars_decode($donnees['nom_film']); ?></td>
+			<td><?php echo htmlspecialchars_decode($donnees['realisateur_film']); ?></td>
+			<td><?php echo htmlspecialchars_decode($row[1]); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['sommaire_film']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['note_film']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($row[0]); ?></td>
 		</tr>
 		<script type='text/javascript' src="../js/popupFilm.js"></script>
 		<?php

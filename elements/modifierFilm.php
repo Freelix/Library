@@ -8,11 +8,11 @@
 		exit();
 	}
 	
-	$nFilm = utf8_decode($_POST['nomFilmPop']);
-	$autFilm = utf8_decode($_POST['realFilmPop']);
-	$empFilm = utf8_decode($_POST['emplacementDropDown']);
-	$sommFilm = utf8_decode($_POST['sommaireFilmPop']);
-	$noteFilm = utf8_decode($_POST['noteFilmPop']);
+	$nFilm = htmlspecialchars($_POST['nomFilmPop'], ENT_QUOTES);
+	$autFilm = htmlspecialchars($_POST['realFilmPop'], ENT_QUOTES);
+	$empFilm = htmlspecialchars($_POST['emplacementDropDown'], ENT_QUOTES);
+	$sommFilm = htmlspecialchars($_POST['sommaireFilmPop'], ENT_QUOTES);
+	$noteFilm = htmlspecialchars($_POST['noteFilmPop'], ENT_QUOTES);
 	
 	$nFilm = str_replace("'", "''", $nFilm);
 	$autFilm = str_replace("'", "''", $autFilm);

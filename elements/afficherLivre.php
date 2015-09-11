@@ -34,15 +34,15 @@
 		?>
 		<tr class="pop">
 			<td class="hide"><?php echo $donnees['id_livre']; ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($donnees['nom_livre'])); ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($donnees['auteur_livre'])); ?></td>
-			<td><?php echo htmlspecialchars(utf8_encode($row[1])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['editeur_livre'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['sommaire_livre'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['note_livre'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['publishedDate'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($donnees['pageCount'])); ?></td>
-			<td class="hide"><?php echo htmlspecialchars(utf8_encode($row[0])); ?></td>
+			<td><?php echo htmlspecialchars_decode($donnees['nom_livre']); ?></td>
+			<td><?php echo htmlspecialchars_decode($donnees['auteur_livre']); ?></td>
+			<td><?php echo htmlspecialchars_decode($row[1]); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['editeur_livre']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['sommaire_livre']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['note_livre']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['publishedDate']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($donnees['pageCount']); ?></td>
+			<td class="hide"><?php echo htmlspecialchars_decode($row[0]); ?></td>
 		</tr>
 		<script type='text/javascript' src="../js/popupLivre.js"></script>		
 		<?php

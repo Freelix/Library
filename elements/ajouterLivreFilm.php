@@ -13,14 +13,14 @@
 		exit();
 	}
 	
-	$nLivre = utf8_decode($_POST['nomLivre']);
-	$autLivre = utf8_decode($_POST['auteurLivre']);
-	$empLivre = utf8_decode($_POST['emplacementDropDown']);
-	$editLivre = utf8_decode($_POST['editeurLivre']);
-	$sommLivre = utf8_decode($_POST['sommaireLivre']);
-	$noteLivre = utf8_decode($_POST['noteLivre']);
-	$publishedDate = utf8_decode($_POST['publishedDate']);
-	$pageCount = utf8_decode($_POST['pageCount']);
+	$nLivre = htmlspecialchars($_POST['nomLivre'], ENT_QUOTES);
+	$autLivre = htmlspecialchars($_POST['auteurLivre'], ENT_QUOTES);
+	$empLivre = htmlspecialchars($_POST['emplacementDropDown'], ENT_QUOTES);
+	$editLivre = htmlspecialchars($_POST['editeurLivre'], ENT_QUOTES);
+	$sommLivre = htmlspecialchars($_POST['sommaireLivre'], ENT_QUOTES);
+	$noteLivre = htmlspecialchars($_POST['noteLivre'], ENT_QUOTES);
+	$publishedDate = htmlspecialchars($_POST['publishedDate'], ENT_QUOTES);
+	$pageCount = htmlspecialchars($_POST['pageCount'], ENT_QUOTES);
 	
 	$nLivre = str_replace("'", "''", $nLivre);
 	$autLivre = str_replace("'", "''", $autLivre);

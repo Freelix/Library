@@ -1,0 +1,39 @@
+#overlay_form{
+position: absolute;
+border: 5px solid gray;
+padding: 10px;
+background: white;
+width: 470px;
+height: 820px;
+z-index:2;
+}
+
+.textPop{
+	width: 400px;
+	padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-top: 5px; margin-bottom: 15px;
+}
+
+.textAreaPop{
+	width: 400px;
+	height: 105px;
+	padding: 5px; color: #ffffff; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size: 12px; border: 1px solid #15171d;  background: #30333c; margin-top: 5px; margin-bottom: 15px; resize: none;
+}
+
+.textPopHidden{
+	visibility: hidden;
+	margin: 0 0 0 0;
+	width: 1px;
+	height: 1px;
+}
+
+.buttonPop{
+	font-size: 11px; background: #15171d; color: #fff; cursor:pointer; border: 1px solid #30333c; padding: 4px 10px; margin-right: 50px;
+}
+
+#closePop{
+	margin-left: 5px;
+}
+
+#supprimerPop{
+	margin-left: 40px;
+}

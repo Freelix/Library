@@ -1,65 +1,23 @@
 <?php session_start(); ?>
-
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
+  <!DOCTYPE>
+  <html>
 
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Ajouter des films ou des livres</title>
-    <meta name="keywords" content="simple, grid, theme, free templates, web design, one page layout, slategray, steelblue, templatemo, CSS, HTML" />
+    <?php include("../elements/views/sections/header.php"); ?>
+      <title>Ajouter des films ou des livres</title>
+      <script type='text/javascript' src="/Library/Content/js/views/ajouterFilmOuLivre.js"></script>
 
-    <link href="../css/templatemo_style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../css/menu_style.css" type="text/css" />
-    <script type='text/javascript' src="../js/jquery-1.9.1.min.js"></script>
-    <script type='text/javascript' src="../js/ajouterFilmOuLivre.js"></script>
-    <script type='text/javascript' src="../js/helper.js"></script>
-
-    <!-- Include jQuery Popup Overlay -->
-    <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.10/jquery.popupoverlay.js"></script>
+      <!-- Include jQuery Popup Overlay -->
+      <script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.10/jquery.popupoverlay.js"></script>
   </head>
 
   <body>
-    <!-- Add content to the popup -->
-    <div id="my_popup">
+    <?php include("../elements/views/popup/popupAddItem.php"); ?>
 
-      <h1>------ Informations ------</h1>
-
-      <label class="labelTitle">Nom du livre</label>
-      <label id="scannerNomLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Auteur du livre</label>
-      <label id="scannerAuteurLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Editeur du livre</label>
-      <label id="scannerEditeurLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Sommaire du livre</label>
-      <label id="scannerSommaireLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Notes reliées au livre</label>
-      <label id="scannerNotesLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Date publiée</label>
-      <label id="scannerPublishedDateLivre" class="labelGeneral"></label>
-
-      <label class="labelTitle">Nombre de pages</label>
-      <label id="scannerPageCountLivre" class="labelGeneral"></label>
-
-      <div class="my_popup_bottom">
-        <button id="my_popup_modify" class="my_popup_btn">Corriger</button>
-        <button id="my_popup_ok" class="my_popup_btn">Ok</button>
-      </div>
-
-    </div>
-
-    <div id="templatemo_wrapper">
-
-      <!-- ===================================================== -->
-      <?php include("../elements/header.php"); ?>
-        <!-- ===================================================== -->
+      <div id="templatemo_wrapper">
 
         <!-- ===================================================== -->
-        <?php include("../elements/menu.php"); ?>
+        <?php include("../elements/views/sections/menu.php"); ?>
           <!-- ===================================================== -->
           <div id="templatemo_main">
 
@@ -67,7 +25,7 @@
             <div id="about" class="main_box">
               <div id="contact_form">
                 <h4>Ajouter un livre ou un film</h4>
-                <form method="post" id="addForm" name="ajout" action="../elements/ajouterLivreFilm.php">
+                <form method="post" id="addForm" name="ajout" action="../elements/add/ajouterLivreFilm.php">
                   <label>Nom du livre/film : </label>
                   <input type="text" name="nomLivre" id="nomLivre" value="<?php if(isset($_SESSION['nomLivre'])) echo utf8_encode($_SESSION['nomLivre']); ?>" class="required input_field" />
 
@@ -80,10 +38,14 @@
                   </div>
 
                   <label for="author">Sommaire : </label>
-                  <textarea name="sommaireLivre" id="sommLivre" class="required input_large_field"><?php if(isset($_SESSION['sommaire'])) echo utf8_encode($_SESSION['sommaire']); ?></textarea>
+                  <textarea name="sommaireLivre" id="sommLivre" class="required input_large_field">
+                    <?php if(isset($_SESSION['sommaire'])) echo utf8_encode($_SESSION['sommaire']); ?>
+                  </textarea>
 
                   <label for="author">Notes : </label>
-                  <textarea name="noteLivre" id="notLivre" class="required input_large_field"><?php if(isset($_SESSION['note'])) echo utf8_encode($_SESSION['note']); ?></textarea>
+                  <textarea name="noteLivre" id="notLivre" class="required input_large_field">
+                    <?php if(isset($_SESSION['note'])) echo utf8_encode($_SESSION['note']); ?>
+                  </textarea>
 
                   <div class="infosLivre">
                     <label>Date publiée : </label>
@@ -92,9 +54,9 @@
                     <label>Nombre de pages : </label>
                     <input type="text" name="pageCount" id="pageCount" value="<?php if(isset($_SESSION['pageCount'])) echo utf8_encode($_SESSION['pageCount']); ?>" class="required input_field" />
                   </div>
-                  
+
                   <label for="author">Emplacement du livre/film : </label>
-                  <?php include("../elements/afficherEmplacement.php") ?>
+                  <?php include("../elements/show/afficherEmplacement.php") ?>
 
                     <label for="author">Type : </label>
                     <select id="filmOuLivre" name="LivreOrFilm">
@@ -122,23 +84,20 @@
                 <div id="result" class="message"></div>
               </div>
               <!-- END of about -->
-              <?php include("../elements/afficherMessage.php"); ?>
+              <?php include("../elements/show/afficherMessage.php"); ?>
                 <!-- ===================================================== -->
             </div>
             <!-- END of -->
 
             <!-- ===================================================== -->
-            <?php include("../elements/footer.php"); ?>
+            <?php include("../elements/views/sections/footer.php"); ?>
               <!-- ===================================================== -->
 
           </div>
+      </div>
 
-          <div>
-            <span id="popupEmplacement">
-              <img id="imgEmplacement" class="popupEmplacementImage" src="" alt="" />
-            </span>
-          </div>
-          
+      <?php include("../elements/views/popup/popupEmplacements.php"); ?>
+
   </body>
 
   </html>

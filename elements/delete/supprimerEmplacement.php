@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$root = $_SERVER['DOCUMENT_ROOT'] . "Library/";
+	$root = $_SERVER['DOCUMENT_ROOT'] . "/Library/";
 
 	if (!empty($_POST['emplacementDropDown'])){
 		include($root . "Utils/database/connexion.php");

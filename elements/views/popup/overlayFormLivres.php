@@ -24,7 +24,7 @@
 	<input type="text" class="textPop" name="pageCountPop" id="pageCountLiv"/><br/>
 	
 	<label class="labelPop">Emplacement: </label><br/>
-	<?php $root = $_SERVER['DOCUMENT_ROOT'] . "Library/"; ?>
+	<?php $root = $_SERVER['DOCUMENT_ROOT'] . "/Library/"; ?>
 	<?php include($root . "elements/show/afficherEmplacement.php") ?><br/><br/>
 	
 	<input type="submit" class="buttonPop" value="Enregistrer" />

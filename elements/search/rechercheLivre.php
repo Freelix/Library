@@ -26,5 +26,5 @@
 	}
 
 	$_SESSION['rechercheLivre'] = $query;
-	header("Location: /Library/views/listeFilms.php");
+	header("Location: /Library/views/listeLivres.php");
 ?>

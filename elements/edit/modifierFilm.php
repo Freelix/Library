@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$root = $_SERVER['DOCUMENT_ROOT'] . "Library/";
+	$root = $_SERVER['DOCUMENT_ROOT'] . "/Library/";
     include($root . "Utils/database/connexion.php");
 	
 	if (empty($_POST['idFilmPop']) OR empty($_POST['nomFilmPop']) OR empty($_POST['realFilmPop']) OR empty($_POST['emplacementDropDown']))

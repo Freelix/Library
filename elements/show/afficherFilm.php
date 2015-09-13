@@ -1,5 +1,5 @@
 <?php
-	$root = $_SERVER['DOCUMENT_ROOT'] . "Library/";
+	$root = $_SERVER['DOCUMENT_ROOT'] . "/Library/";
     include($root . "Utils/database/connexion.php");
 
 	$pageLimit = 20;

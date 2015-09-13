@@ -142,10 +142,6 @@ $(document).ready(function() {
 
             $("#result").css("color", "green");
             $("#result").html(response);
-
-            $("html, body").animate({
-                scrollTop: $(document).height() - $(window).height()
-            });
         });
 
         ajaxRequest.fail(function(xhr, textStatus, error) {

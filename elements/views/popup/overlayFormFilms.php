@@ -15,7 +15,7 @@
 	<textarea class="textAreaPop" name="noteFilmPop" id ="noteMovie"></textarea><br/>
 	
 	<label class="labelPop">Emplacement du film: </label><br/>
-	<?php $root = $_SERVER['DOCUMENT_ROOT'] . "Library/"; ?>
+	<?php $root = $_SERVER['DOCUMENT_ROOT'] . "/Library/"; ?>
 	<?php include($root . "elements/show/afficherEmplacement.php") ?><br/><br/>
 	
 	<input type="submit" class="buttonPop" value="Enregistrer" />
